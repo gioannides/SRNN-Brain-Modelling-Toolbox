@@ -4,7 +4,7 @@ clear all;
 
 %Uncomment this to try out different rewiring probabilities
 %ps = 1:1:10;
-ps = 1;
+ps = 2;
 % Define number of timesteps in upsampled EEG signal
 time = 19200;
 % Define number of excitatory neurons
@@ -22,23 +22,23 @@ mkdir('./results/Connectivity');
 mkdir('./results/MFR');
 for p = ps
     % Build the topology of modular SWN
-    CIJ = BuildTopology(p/10, Ne_, Ni_);
-    % Create the TASK network
-    layer = ConnectNetwork(CIJ,Ne_,Ni_);   
-    % Create the TARGET network
-    layer2 = ConnectNetwork(CIJ,Ne_,Ni_);  
-    % Carry out modified-Full-Force
-    [firings, firings2, boxes] = Simulate(layer,layer2,time,Ne_,Ni_);
-    % Estimate MFR of excitatory neurons of TASK network
-    MFR = MeanFiringRate(firings,ws,ds);    
-    % Estimate Dynamical Complexity of TASK network
-    complexity = NeuralComplexity(MFR);
-    fprintf('Dynamical Complexity: %.5f \n', complexity);
+    [CIJ,Ne_per_module] = BuildTopology(p/10, Ne_, Ni_);
     % store the connectivity matrix
     clf;
     spy(CIJ,'k.');
     xlabel('');
     saveas( gcf,['./results/Connectivity/CM_' num2str(p/10) '.png'], 'png' );
+    % Create the TASK network
+    layer = ConnectNetwork(CIJ,Ne_,Ni_);   
+    % Create the TARGET network
+    layer2 = ConnectNetwork(CIJ,Ne_,Ni_);  
+    % Carry out modified-Full-Force
+    [firings, firings2, boxes] = Simulate(layer,layer2,time,Ne_,Ni_,Ne_per_module);
+    % Estimate MFR of excitatory neurons of TASK network
+    MFR = MeanFiringRate(firings,ws,ds, Ne_per_module);    
+    % Estimate Dynamical Complexity of TASK network
+    complexity = NeuralComplexity(MFR);
+    fprintf('Dynamical Complexity: %.5f \n', complexity);
     
     %Raster plots of excitatory firings of TASK network  
     figure();
@@ -66,7 +66,7 @@ for p = ps
     plot(1:ds:time,MFR);
     xlabel(['Timestep']);
     ylabel('Mean Firing Rate');
-    saveas(gcf,strcat('./results/Firing_MFR/F_MFR_',num2str(p/10),'.png'),'png');
+    saveas(gcf,strcat('./results/MFR/_MFR_',num2str(p/10),'.png'),'png');
 end
 
    

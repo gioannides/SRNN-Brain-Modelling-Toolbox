@@ -1,4 +1,4 @@
-function [firings, firings2, boxes] = Simulate(layer,layer2,time,Ne_,Ni_)
+function [firings, firings2, boxes] = Simulate(layer,layer2,time,Ne_,Ni_,Ne_per_module)
 
   
    % The number of interations to settle for wrong initial conditions
@@ -8,7 +8,7 @@ function [firings, firings2, boxes] = Simulate(layer,layer2,time,Ne_,Ni_)
    x1 = [];
    y1 = [];
    y2 = [];
-   
+   dt = 0.1526531;
    boxes = [];
    %Uncomment the line below for trying many EEG channels (also the corresponding end)
    %for lll=1:1:32
@@ -269,7 +269,7 @@ function [firings, firings2, boxes] = Simulate(layer,layer2,time,Ne_,Ni_)
     end
     boxes = [boxes errors_train];
     rmse = sqrt(mean(summation));
-    MFR = MeanFiringRate(firings,50,20);    
+    MFR = MeanFiringRate(firings,50,20,Ne_per_module);    
     complexity = NeuralComplexity(MFR);
     fprintf('Dmax: %.1f, RMSE: %.1f, Complexity: %.5f \n', Dmax, rmse, complexity);
     %x1 = [x1 Dmax];

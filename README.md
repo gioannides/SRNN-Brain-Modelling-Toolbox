@@ -1,6 +1,6 @@
 # RSNN-Brain-Modelling-Toolbox
 
-**Acknowledgment: 
+**Acknowledgment:** 
 
 Code inspired by: Nicola & Clopath 2017, (C) Murray Shanahan et al, 2015
 

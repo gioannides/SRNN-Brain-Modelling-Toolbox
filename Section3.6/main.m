@@ -59,7 +59,6 @@ for p = ps
     %xlim([0 time])
     %ylabel('Neuron Index')
     %ylim([0 200+1])
-    %set(gca,'YDir','reverse')
     
     % Plot the Mean Firing Rates of each excitatory module of TASK network
     subplot(2,1,2);

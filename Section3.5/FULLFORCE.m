@@ -1,4 +1,4 @@
-%% Force Method with Izhikevich Network 
+%% Full-Force Method with Izhikevich Network 
 clear all
 close all
 clc 

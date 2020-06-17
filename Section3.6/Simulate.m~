@@ -14,6 +14,7 @@ function [firings, firings2, boxes] = Simulate(layer,layer2,time,Ne_,Ni_,Ne_per_
    %for lll=1:1:32
    close all;
    x0 = x0_.data1{1,1}(14,:,1);
+   %x0 = x0.dataset{1,1}(:,:,1);
    data = double(x0);
    % Set the sampling frequency
    Fs = 128;

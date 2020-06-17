@@ -3,8 +3,8 @@ clc;
 clear all;
 
 %Uncomment this to try out different rewiring probabilities
-%ps = 1:1:10;
-ps = 2;
+%p_ = 1:1:10;
+p_ = 1;
 % Define number of timesteps in upsampled EEG signal
 time = 19200;
 % Define number of excitatory neurons
@@ -13,16 +13,17 @@ Ne_ = 1600;
 Ni_ = 400;
 % Set the seed for reproducibility
 rng(8);
-% Store the errors of each EEG channel in this array
+% Store the errors of each EEG channel in this array to plot a boxplot
 boxes = [];
-ws = 50; % window size - must be greater than or equal to Dmax
-ds = 20; % slide window by ds
+window_size = 50; % window size (it must be greater than or equal to Dmax)
+slide_window = 20; % slide window
 mkdir('results');
 mkdir('./results/Connectivity');
 mkdir('./results/MFR');
-for p = ps
+for p = p_
     % Build the topology of modular SWN
-    [CIJ,Ne_per_module] = BuildTopology(p/10, Ne_, Ni_);
+    beta = p/10;
+    [CIJ,Ne_per_module] = BuildTopology(beta, Ne_, Ni_);
     % store the connectivity matrix
     clf;
     spy(CIJ,'k.');
@@ -35,7 +36,7 @@ for p = ps
     % Carry out modified-Full-Force
     [firings, firings2, boxes] = Simulate(layer,layer2,time,Ne_,Ni_,Ne_per_module);
     % Estimate MFR of excitatory neurons of TASK network
-    MFR = MeanFiringRate(firings,ws,ds, Ne_per_module);    
+    MFR = MeanFiringRate(firings,window_size,slide_window, Ne_per_module);    
     % Estimate Dynamical Complexity of TASK network
     complexity = NeuralComplexity(MFR);
     fprintf('Dynamical Complexity: %.5f \n', complexity);
@@ -62,7 +63,7 @@ for p = ps
     
     % Plot the Mean Firing Rates of each excitatory module of TASK network
     subplot(2,1,2);
-    plot(1:ds:time,MFR);
+    plot(1:slide_window:time,MFR);
     xlabel(['Timestep']);
     ylabel('Mean Firing Rate');
     saveas(gcf,strcat('./results/MFR/_MFR_',num2str(p/10),'.png'),'png');

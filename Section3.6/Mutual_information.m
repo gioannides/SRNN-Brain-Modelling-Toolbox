@@ -4,7 +4,7 @@ function [ MI ] = Mutual_information( X,S )
   
   N = size(S, 1);
   
-  MI = find_entropy(S(X, :)) + find_entropy(S(setdiff(1:N, X), :)) - find_entropy(S);
+  MI = get_entropy(S(X, :)) + get_entropy(S(setdiff(1:N, X), :)) - get_entropy(S);
 
 end
 

@@ -1,4 +1,4 @@
-function [ nc ] = NeuralComplexity(S)
+function [ DynComplexity ] = NeuralComplexity(S)
   
   % Find integration
   H_X = 0;
@@ -7,14 +7,14 @@ function [ nc ] = NeuralComplexity(S)
   N = size(S, 1);
   
   for i = 1:N    
-    H_X = H_X + find_entropy(S(i, :));
+    H_X = H_X + get_entropy(S(i, :));
   end
 
-  Integration = H_X - find_entropy(S);
+  Integration = H_X - get_entropy(S);
   
   % Find Interaction Complexity
   
-  disp(Integration);
+  %disp(Integration);
   
   IC = 0;
   
@@ -22,11 +22,11 @@ function [ nc ] = NeuralComplexity(S)
     IC = IC + Mutual_information(i,S);
   end
 
-  disp(IC);
+  %disp(IC);
   
   IC = IC - Integration;
 
-  nc = IC;
+  DynComplexity = IC;
   
   
 end

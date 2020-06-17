@@ -1,7 +1,7 @@
-function CIJ = NetworkDirectedRandom(N,C)
+function CIJ = RandomNetwork(N,randConns)
 % Creates a random network with N nodes and C randomly assigned one-way connections
 CIJ = zeros(N,N);
-for i = 1:C
+for i = 1:randConns
     f = 0;
     t = 0;
     while f == t || CIJ(f,t) == 1

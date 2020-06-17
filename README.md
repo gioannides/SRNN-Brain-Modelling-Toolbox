@@ -9,8 +9,8 @@ Some code inspired by: Nicola & Clopath 2017, (C) Murray Shanahan et al, 2015, E
 Clone the repository and change the MATLAB directory to the folder in which the m-files are saved.
 
 ### Running the code
-For biologically-plausible networks using the modified-Full-Force, run "main.m" within the Section3.6 folder.
+For training biologically-plausible networks using the modified-Full-Force, run "main.m" within the Section3.6 folder.
 
-For use of excitatory neurons only, run "FULLFORCE.m" within Section3.5 folder.
+For use of excitatory neurons only during training, run "FULLFORCE.m" within Section3.5 folder.
 
 For graph theoretic experiments, run the Jupyter Notebook within Section3.1 folder.

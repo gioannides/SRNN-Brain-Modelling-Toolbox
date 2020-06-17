@@ -2,9 +2,6 @@
 clear all
 close all
 clc 
-%m = load('../IZplots/CzChannelEpoch1_FITTED_RS_neuronsmat.mat');
-%m = load('../IZplots/Czfullforce.mat');
-%m = load('SWN/fullforceIB.mat');
 m = load('matlab.mat');
 m = m.task;
 %x = m.x;

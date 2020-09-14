@@ -1,5 +1,7 @@
 # RSNN-Brain-Modelling-Toolbox
 
+**The copyright of this work submitted as part of the Master Thesis at Imperial College London, rests with the author, Georgios Ioannides. When reusing or sharing this work, ensure you credit the author clearly to others.**
+
 **Acknowledgment:** 
 
 Some code inspired by: Nicola & Clopath 2017, (C) Murray Shanahan et al, 2015, Eugene M. Izhikevich

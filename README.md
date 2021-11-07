@@ -1,4 +1,4 @@
-# RSNN-Brain-Modelling-Toolbox
+# SRNN-Brain-Modelling-Toolbox
 
 **Pre-print: https://doi.org/10.21203/rs.3.rs-721706/v1**
 
